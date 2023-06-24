@@ -52,7 +52,7 @@ sap.ui.define(
         bindingContext.delete();
 
         // Need to visually indicate that the row is deleted...
-        if (!bindingContext.getPath().includes("/Employees('id-"))
+        if (!bindingContext.isTransient())
           this._displayRowIsDeleted(true, item);
       },
 
@@ -106,10 +106,7 @@ sap.ui.define(
         }
 
         items.forEach((item) => {
-          if (
-            enableFlag &&
-            item.getBindingContext().getPath().includes("/Employees('id-")
-          ) {
+          if (enableFlag && item.getBindingContext().isTransient()) {
             let cells = item.getCells();
             cells.forEach((cell) => {
               if (cell instanceof Input) {
