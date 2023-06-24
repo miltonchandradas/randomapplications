@@ -56,6 +56,14 @@ sap.ui.define(
           this._displayRowIsDeleted(true, item);
       },
 
+      onReset: function () {
+        this._mainModel.resetChanges(null, false, true).then(() => {
+          // Need to disable cells for editing...
+          this._enableCellsForEditing(false, false);
+          this._displayRowIsDeleted(false, null);
+        });
+      },
+
       onSubmit: function () {
         this._mainModel.submitChanges();
 
