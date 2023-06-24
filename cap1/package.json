@@ -12,10 +12,12 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "@sap/ux-specification": "^1.108.7",
     "sqlite3": "^5.0.4"
   },
   "scripts": {
-    "start": "cds run"
+    "start": "cds run",
+    "watch-uiapp1": "cds watch --open uiapp1/webapp/index.html?sap-ui-xx-viewCache=false"
   },
   "cds": {
     "requires": {
@@ -26,5 +28,8 @@
         }
       }
     }
-  }
+  },
+  "sapux": [
+    "app/uiapp1"
+  ]
 }

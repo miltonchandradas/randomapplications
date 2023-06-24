@@ -1,0 +1,42 @@
+<mvc:View controllerName="com.sap.uiapp1.controller.Master"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <Table id="masterTable" items="{path: '/Employees'}">
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <content>
+                            <Title text="Employees" level="H2"/>
+                            <ToolbarSpacer />
+                        </content>
+                    </OverflowToolbar>
+                </headerToolbar>
+                <infoToolbar>
+                    <OverflowToolbar>
+                        <Label text="List of active employees"/>
+                    </OverflowToolbar>
+                </infoToolbar>
+                <columns>
+                    <Column >
+                        <Text text="First Name"></Text>
+                    </Column>
+                    <Column >
+                        <Text text="Last Name"></Text>
+                    </Column>
+                    <Column >
+                        <Text text="Email"></Text>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem >
+                        <Text text="{firstName}"></Text>
+                        <Text text="{lastName}"></Text>
+                        <Text text="{email}"></Text>
+                    </ColumnListItem>
+                </items>
+            </Table>
+
+        </content>
+    </Page>
+</mvc:View>
