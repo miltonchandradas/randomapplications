@@ -44,11 +44,49 @@ sap.ui.define(
         this._enableCellsForEditing(true, true);
       },
 
+      onDeleteLocal: function (oEvent) {
+        let src = oEvent.getSource();
+        let item = src.getParent();
+
+        let bindingContext = item.getBindingContext();
+        bindingContext.delete();
+
+        // Need to visually indicate that the row is deleted...
+        if (!bindingContext.getPath().includes("/Employees('id-"))
+          this._displayRowIsDeleted(true, item);
+      },
+
       onSubmit: function () {
         this._mainModel.submitChanges();
 
         // Need to disable cells for editing...
         this._enableCellsForEditing(false, false);
+        this._displayRowIsDeleted(false, null);
+      },
+
+      _displayRowIsDeleted: function (deleteFlag, item) {
+        if (deleteFlag) {
+          item.setHighlight("Error");
+          item.setHighlightText("Row is deleted...");
+          item.setTooltip("Row is deleted...");
+          item.getCells().forEach((cell) => {
+            cell.addStyleClass("cellBackground");
+            cell.setEnabled(false);
+            if (cell instanceof Input) cell.setEditable(false);
+          });
+        } else {
+          let items = this._masterTable.getItems();
+
+          items.forEach((item) => {
+            item.setHighlight("None");
+            item.setHighlightText("");
+            item.setTooltip("");
+            item.getCells().forEach((cell) => {
+              cell.setEnabled(true);
+              cell.removeStyleClass("cellBackground");
+            });
+          });
+        }
       },
 
       _enableCellsForEditing: function (enableFlag, updateFlag) {

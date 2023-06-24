@@ -30,12 +30,16 @@
                     <Column >
                         <Text text="Email"></Text>
                     </Column>
+                    <Column >
+                        <Text text="Delete"></Text>
+                    </Column>
                 </columns>
                 <items>
                     <ColumnListItem >
                         <Input value="{firstName}" editable="false"></Input>
                         <Input value="{lastName}" editable="false"></Input>
                         <Input value="{email}" editable="false"></Input>
+                        <Button icon="sap-icon://delete" press=".onDeleteLocal"></Button>
                     </ColumnListItem>
                 </items>
             </Table>

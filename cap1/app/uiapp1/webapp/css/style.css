@@ -1,1 +1,5 @@
 /* Enter your custom styles here */
+.cellBackground {
+    background-color: orangered !important;
+    text-decoration: line-through 5px red;
+}
