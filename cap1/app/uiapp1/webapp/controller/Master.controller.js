@@ -1,5 +1,9 @@
 sap.ui.define(
-  ["com/sap/uiapp1/controller/BaseController", "sap/ui/model/json/JSONModel", "sap/m/Input"],
+  [
+    "com/sap/uiapp1/controller/BaseController",
+    "sap/ui/model/json/JSONModel",
+    "sap/m/Input",
+  ],
   /**
    * @param {typeof sap.ui.core.mvc.Controller} Controller
    */
@@ -45,10 +49,7 @@ sap.ui.define(
       _enableCellsForEditing: function (enableFlag) {
         let items = this._masterTable.getItems();
         items.forEach((item) => {
-          if (
-            enableFlag &&
-            item.getBindingContext().getPath().includes("/Employees('id-")
-          ) {
+          if (enableFlag && item.getBindingContext().isTransient()) {
             let cells = item.getCells();
             cells.forEach((cell) => {
               if (cell instanceof Input) {
