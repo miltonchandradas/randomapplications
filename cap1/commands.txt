@@ -1,0 +1,11 @@
+RUN LOCALLY - cds watch:
+----------------------------------------------------------------------------------------
+rm cap1.sqlite
+cds deploy --to sqlite:cap1.sqlite
+cds watch
+
+RUN LOCALLY - npm run serve:
+----------------------------------------------------------------------------------------
+rm cap1.sqlite
+cds deploy --to sqlite:cap1.sqlite
+npm run serve
