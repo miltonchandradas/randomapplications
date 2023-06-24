@@ -69,8 +69,7 @@ sap.ui.define(
 
         items.forEach((item) => {
           if (
-            enableFlag &&
-            item.getBindingContext().getPath().includes("/Employees('id-")
+            enableFlag && item.getBindingContext().isTransient()
           ) {
             let cells = item.getCells();
             cells.forEach((cell) => {
