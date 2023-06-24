@@ -29,9 +29,9 @@ sap.ui.define(
       onCreateLocal: function () {
         let binding = this._masterTable.getBinding("items");
         let initialValues = {
-          firstName: "",
-          lastName: "",
-          email: "",
+          firstName: null,
+          lastName: null,
+          email: null,
         };
         binding.create(initialValues);
 
