@@ -9,8 +9,9 @@
                         <content>
                             <Title text="Employees" level="H2"/>
                             <ToolbarSpacer />
+                            <Button icon="sap-icon://edit" text="Update (Local)" press=".onUpdateLocal"/>
                             <Button icon="sap-icon://create" text="Create (Local)" press=".onCreateLocal"/>
-                            <Button icon="sap-icon://update" text="Submit Changes" press=".onSubmit"/>
+                            <Button icon="sap-icon://complete" text="Submit Changes" press=".onSubmit"/>
                         </content>
                     </OverflowToolbar>
                 </headerToolbar>
