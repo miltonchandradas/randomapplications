@@ -52,7 +52,8 @@ sap.ui.define(
         bindingContext.delete();
 
         // Need to visually indicate that the row is deleted...
-        if (!bindingContext.isTransient())
+        // isTransient is not working here - maybe because row is deleted...
+        if (!bindingContext.getPath().includes("/Employees('id-"))
           this._displayRowIsDeleted(true, item);
       },
 
