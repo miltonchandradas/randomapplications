@@ -49,11 +49,11 @@ sap.ui.define(
         let item = src.getParent();
 
         let bindingContext = item.getBindingContext();
+        let isTransient = bindingContext.isTransient();
         bindingContext.delete();
 
         // Need to visually indicate that the row is deleted...
-        if (!bindingContext.isTransient())
-          this._displayRowIsDeleted(true, item);
+        if (!isTransient) this._displayRowIsDeleted(true, item);
       },
 
       onReset: function () {
