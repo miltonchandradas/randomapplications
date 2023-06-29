@@ -77,7 +77,7 @@
         "type": "sap.ui.model.odata.v2.ODataModel",
         "settings": {
           "preload": true,
-          "useBatch": true,
+          "useBatch": false,
           "defaultBindingMode": "TwoWay"
         }
       }
