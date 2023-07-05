@@ -9,7 +9,7 @@ module.exports = async (srv) => {
       case "UNIQUE_CONSTRAINT_VIOLATION":
       case "ENTITY_ALREADY_EXISTS":
         err.message =
-          "The entry already exists...  For example, an Employee can have only one active Job Action";
+          "The entry already exists...  For example, an Employee with the same first name and last name already exists";
         break;
 
       default:
