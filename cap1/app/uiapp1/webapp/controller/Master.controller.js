@@ -24,6 +24,7 @@ sap.ui.define(
         this._viewModel = this.getView().getModel("viewModel");
 
         this._mainModel = this.getOwnerComponent().getModel();
+        this._mainModel.setDeferredGroups(["CREATE", "UPDATE", "DELETE"]);
         this._masterTable = this.byId("masterTable");
       },
 
@@ -35,8 +36,13 @@ sap.ui.define(
           email: "",
         };
 
-        let changeSetId = globalThis.crypto.randomUUID();;
-        binding.create(initialValues, false, { changeSetId });
+        let changeSetId = globalThis.crypto.randomUUID();
+        let groupId = "CREATE";
+        binding.create(initialValues, false, {
+          changeSetId,
+          groupId,
+          inactive: false,
+        });
 
         // Need to enable cells for editing...
         this._enableCellsForEditing(true, false);
@@ -53,7 +59,9 @@ sap.ui.define(
 
         let bindingContext = item.getBindingContext();
         let isTransient = bindingContext.isTransient();
-        bindingContext.delete();
+
+        let groupId = "DELETE";
+        bindingContext.delete({ groupId });
 
         // Need to visually indicate that the row is deleted...
         if (!isTransient) this._displayRowIsDeleted(true, item);
@@ -67,8 +75,8 @@ sap.ui.define(
         });
       },
 
-      onSubmit: function () {
-        this._mainModel.submitChanges();
+      onSubmit: function (groupId) {
+        this._mainModel.submitChanges({ groupId });
 
         // Need to disable cells for editing...
         this._enableCellsForEditing(false, false);
