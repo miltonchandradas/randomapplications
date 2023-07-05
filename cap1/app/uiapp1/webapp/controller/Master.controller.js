@@ -3,11 +3,12 @@ sap.ui.define(
     "com/sap/uiapp1/controller/BaseController",
     "sap/ui/model/json/JSONModel",
     "sap/m/Input",
+    "sap/base/util/uid",
   ],
   /**
    * @param {typeof sap.ui.core.mvc.Controller} Controller
    */
-  function (BaseController, JSONModel, Input) {
+  function (BaseController, JSONModel, Input, uid) {
     "use strict";
 
     return BaseController.extend("com.sap.uiapp1.controller.Master", {
@@ -29,11 +30,13 @@ sap.ui.define(
       onCreateLocal: function () {
         let binding = this._masterTable.getBinding("items");
         let initialValues = {
-          firstName: null,
-          lastName: null,
-          email: null,
+          firstName: "",
+          lastName: "",
+          email: "",
         };
-        binding.create(initialValues);
+
+        let changeSetId = globalThis.crypto.randomUUID();;
+        binding.create(initialValues, false, { changeSetId });
 
         // Need to enable cells for editing...
         this._enableCellsForEditing(true, false);

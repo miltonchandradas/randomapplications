@@ -7,9 +7,9 @@ using {cuid} from '@sap/cds/common';
     lastName
 ]}
 entity Employees : cuid {
-    firstName  : String not null;
-    lastName   : String not null;
-    email      : String not null;
+    firstName  : String @mandatory;
+    lastName   : String @mandatory;
+    email      : String @mandatory;
     department : Association to Departments;
 }
 
