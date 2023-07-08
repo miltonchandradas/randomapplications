@@ -3,7 +3,7 @@
     xmlns="sap.m">
     <Page id="page" title="{i18n>title}" busy="{viewModel>/busy}" class="sapUiSizeCompact">
         <content>
-            <Table id="masterTable" items="{path: '/Employees'}" class="sapUiMediumMarginTop">
+            <Table id="masterTable" items="{path: '/Employees', sorter: { path: 'priority'}}" class="sapUiMediumMarginTop">
                 <headerToolbar>
                     <OverflowToolbar>
                         <content>
@@ -12,9 +12,7 @@
                             <Button icon="sap-icon://edit" text="Update (Local)" press=".onUpdateLocal"/>
                             <Button icon="sap-icon://create" text="Create (Local)" press=".onCreateLocal"/>
                             <Button icon="sap-icon://reset" text="Reset Changes" press=".onReset"/>
-                            <Button icon="sap-icon://complete" text="Submit CREATE" press=".onSubmit('CREATE')"/>
-                            <Button icon="sap-icon://complete" text="Submit UPDATE" press=".onSubmit('UPDATE')"/>
-                            <Button icon="sap-icon://complete" text="Submit DELETE" press=".onSubmit('DELETE')"/>
+                            <Button icon="sap-icon://complete" text="Submit Changes" press=".onSubmit"/>
                         </content>
                     </OverflowToolbar>
                 </headerToolbar>
@@ -34,6 +32,9 @@
                         <Text text="Email"></Text>
                     </Column>
                     <Column >
+                        <Text text="Priority"></Text>
+                    </Column>
+                    <Column >
                         <Text text="Delete"></Text>
                     </Column>
                 </columns>
@@ -42,6 +43,7 @@
                         <Input value="{firstName}" editable="false"></Input>
                         <Input value="{lastName}" editable="false"></Input>
                         <Input value="{email}" editable="false"></Input>
+                        <Label text="{priority}"></Label>
                         <Button icon="sap-icon://delete" press=".onDeleteLocal"></Button>
                     </ColumnListItem>
                 </items>

@@ -1,3 +1,5 @@
-ID;firstName;lastName;department_ID;email
-de8b2cfb-d518-4979-86b6-5c193a7f48be;Milton;Chandradas;3eb79c63-0b55-4366-8bf9-83dea50192e7;milton@sap.com
-b4e8d3d9-2501-4a7c-9d28-e22249f094aa;Richard;Tanha;3eb79c63-0b55-4366-8bf9-83dea50192e7;richard@sap.com
+ID;firstName;lastName;department_ID;email;priority
+de8b2cfb-d518-4979-86b6-5c193a7f48be;Milton;Chandradas;3eb79c63-0b55-4366-8bf9-83dea50192e7;milton@sap.com;1
+b4e8d3d9-2501-4a7c-9d28-e22249f094aa;Richard;Tanha;3eb79c63-0b55-4366-8bf9-83dea50192e7;richard@sap.com;2
+b13abe2c-e71b-48cd-ab28-c43a865ffc9b;Todd;Fisher;3eb79c63-0b55-4366-8bf9-83dea50192e7;todd@sap.com;3
+1010a1a0-364f-477e-9e5c-0f5cfb3641be;Vinay;Devalla;3eb79c63-0b55-4366-8bf9-83dea50192e7;vinay@sap.com;4

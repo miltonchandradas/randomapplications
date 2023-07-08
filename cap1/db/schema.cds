@@ -2,14 +2,17 @@ namespace demo;
 
 using {cuid} from '@sap/cds/common';
 
-@assert.unique: {name: [
-    firstName,
-    lastName
-]}
+@assert.unique: {
+    name    : [
+        firstName,
+        lastName
+    ]
+}
 entity Employees : cuid {
     firstName  : String @mandatory;
     lastName   : String @mandatory;
     email      : String @mandatory;
+    priority   : Integer;
     department : Association to Departments;
 }
 

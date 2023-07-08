@@ -24,33 +24,43 @@ sap.ui.define(
         this._viewModel = this.getView().getModel("viewModel");
 
         this._mainModel = this.getOwnerComponent().getModel();
-        this._mainModel.setDeferredGroups(["CREATE", "UPDATE", "DELETE"]);
+        this._mainModel.setDeferredGroups(["localChanges"]);
+        this._mainModel.setChangeGroups({
+          Employees: {
+            groupId: "localChanges",
+          },
+        });
         this._masterTable = this.byId("masterTable");
       },
 
       onCreateLocal: function () {
         let binding = this._masterTable.getBinding("items");
+
+        const getInitialPriority = () => {
+          let items = this._masterTable.getItems();
+          let filteredItems = items.filter(
+            (item) => item.getHighlight() !== "Error"
+          );
+
+          return filteredItems.length + 1;
+        };
         let initialValues = {
           firstName: "",
           lastName: "",
           email: "",
+          priority: getInitialPriority(),
         };
 
-        let changeSetId = globalThis.crypto.randomUUID();
-        let groupId = "CREATE";
-        binding.create(initialValues, false, {
-          changeSetId,
-          groupId,
-          inactive: false,
-        });
+        let groupId = "localChanges";
+        binding.create(initialValues, true, { groupId });
 
         // Need to enable cells for editing...
-        this._enableCellsForEditing(true, false);
+        this._enableCellsForEditing(false);
       },
 
       onUpdateLocal: function () {
         // Need to enable cells for editing...
-        this._enableCellsForEditing(true, true);
+        this._enableCellsForEditing(true);
       },
 
       onDeleteLocal: function (oEvent) {
@@ -60,7 +70,19 @@ sap.ui.define(
         let bindingContext = item.getBindingContext();
         let isTransient = bindingContext.isTransient();
 
-        let groupId = "DELETE";
+        const updatePriority = (item) => {
+          let rows = this._masterTable.getItems();
+          let priority = 1;
+          rows.forEach((row) => {
+            if (row !== item && row.getHighlight() !== "Error") {
+              row.getCells()[3].setText(priority);
+              priority++;
+            }
+          });
+        };
+
+        updatePriority(item);
+        let groupId = "localChanges";
         bindingContext.delete({ groupId });
 
         // Need to visually indicate that the row is deleted...
@@ -68,19 +90,23 @@ sap.ui.define(
       },
 
       onReset: function () {
+        let bindingInfo = this._masterTable.getBindingInfo("items");
+        this._masterTable.destroyItems();
         this._mainModel.resetChanges(null, false, true).then(() => {
           // Need to disable cells for editing...
-          this._enableCellsForEditing(false, false);
-          this._displayRowIsDeleted(false, null);
+          this._masterTable.bindItems(bindingInfo);
         });
       },
 
-      onSubmit: function (groupId) {
-        this._mainModel.submitChanges({ groupId });
-
-        // Need to disable cells for editing...
-        this._enableCellsForEditing(false, false);
-        this._displayRowIsDeleted(false, null);
+      onSubmit: function () {
+        let bindingInfo = this._masterTable.getBindingInfo("items");
+        this._masterTable.destroyItems();
+        this._mainModel.submitChanges({
+          success: () => {
+            // Need to disable cells for editing...
+            this._masterTable.bindItems(bindingInfo);
+          },
+        });
       },
 
       _displayRowIsDeleted: function (deleteFlag, item) {
@@ -90,25 +116,13 @@ sap.ui.define(
           item.setTooltip("Row is deleted...");
           item.getCells().forEach((cell) => {
             cell.addStyleClass("cellBackground");
-            cell.setEnabled(false);
+            if (cell instanceof Input) cell.setEnabled(false);
             if (cell instanceof Input) cell.setEditable(false);
           });
-        } else {
-          let items = this._masterTable.getItems();
-
-          items.forEach((item) => {
-            item.setHighlight("None");
-            item.setHighlightText("");
-            item.setTooltip("");
-            item.getCells().forEach((cell) => {
-              cell.setEnabled(true);
-              cell.removeStyleClass("cellBackground");
-            });
-          });
-        }
+        } 
       },
 
-      _enableCellsForEditing: function (enableFlag, updateFlag) {
+      _enableCellsForEditing: function (updateFlag) {
         let items = this._masterTable.getItems();
 
         if (updateFlag) {
@@ -125,18 +139,11 @@ sap.ui.define(
         }
 
         items.forEach((item) => {
-          if (enableFlag && item.getBindingContext().isTransient()) {
+          if (item.getBindingContext().isTransient()) {
             let cells = item.getCells();
             cells.forEach((cell) => {
               if (cell instanceof Input) {
                 cell.setEditable(true);
-              }
-            });
-          } else if (!enableFlag) {
-            let cells = item.getCells();
-            cells.forEach((cell) => {
-              if (cell instanceof Input) {
-                cell.setEditable(false);
               }
             });
           }
