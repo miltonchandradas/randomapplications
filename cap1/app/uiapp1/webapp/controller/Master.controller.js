@@ -24,12 +24,6 @@ sap.ui.define(
         this._viewModel = this.getView().getModel("viewModel");
 
         this._mainModel = this.getOwnerComponent().getModel();
-        this._mainModel.setDeferredGroups(["localChanges"]);
-        this._mainModel.setChangeGroups({
-          Employees: {
-            groupId: "localChanges",
-          },
-        });
         this._masterTable = this.byId("masterTable");
       },
 
@@ -51,8 +45,7 @@ sap.ui.define(
           priority: getInitialPriority(),
         };
 
-        let groupId = "localChanges";
-        binding.create(initialValues, true, { groupId });
+        binding.create(initialValues, true);
 
         // Need to enable cells for editing...
         this._enableCellsForEditing(false);
@@ -82,11 +75,10 @@ sap.ui.define(
         };
 
         updatePriority(item);
-        let groupId = "localChanges";
-        bindingContext.delete({ groupId });
+        bindingContext.delete();
 
         // Need to visually indicate that the row is deleted...
-        if (!isTransient) this._displayRowIsDeleted(true, item);
+        if (!isTransient) this._displayRowIsDeleted(item);
       },
 
       onReset: function () {
@@ -109,17 +101,15 @@ sap.ui.define(
         });
       },
 
-      _displayRowIsDeleted: function (deleteFlag, item) {
-        if (deleteFlag) {
-          item.setHighlight("Error");
-          item.setHighlightText("Row is deleted...");
-          item.setTooltip("Row is deleted...");
-          item.getCells().forEach((cell) => {
-            cell.addStyleClass("cellBackground");
-            if (cell instanceof Input) cell.setEnabled(false);
-            if (cell instanceof Input) cell.setEditable(false);
-          });
-        } 
+      _displayRowIsDeleted: function (item) {
+        item.setHighlight("Error");
+        item.setHighlightText("Row is deleted...");
+        item.setTooltip("Row is deleted...");
+        item.getCells().forEach((cell) => {
+          cell.addStyleClass("cellBackground");
+          if (cell instanceof Input) cell.setEnabled(false);
+          if (cell instanceof Input) cell.setEditable(false);
+        });
       },
 
       _enableCellsForEditing: function (updateFlag) {
@@ -133,9 +123,9 @@ sap.ui.define(
                 cell.setEditable(true);
               }
             });
-
-            return;
           });
+
+          return;
         }
 
         items.forEach((item) => {
