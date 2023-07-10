@@ -13,6 +13,7 @@ entity Employees : cuid {
     lastName   : String @mandatory;
     email      : String @mandatory;
     priority   : Integer;
+    active     : Boolean;
     department : Association to Departments;
 }
 

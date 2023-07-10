@@ -12,12 +12,13 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "@sap/ux-specification": "^1.108.7",
+    "@sap/ux-specification": "^1.108.8",
     "sqlite3": "^5.0.4"
   },
   "scripts": {
     "start": "cds run",
-    "watch-uiapp1": "cds watch --open uiapp1/webapp/index.html?sap-ui-xx-viewCache=false"
+    "watch-uiapp1": "cds watch --open uiapp1/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-uiapp2": "cds watch --open uiapp2/webapp/index.html?sap-ui-xx-viewCache=false"
   },
   "cds": {
     "requires": {
