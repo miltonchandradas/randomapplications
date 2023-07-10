@@ -1,0 +1,27 @@
+<mvc:View controllerName="com.sap.uiapp2.controller.Master"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}" busy="{viewModel>/busy}" class="sapUiSizeCompact">
+        <content>
+            <Table id="masterTable" items="{path: '/Employees', sorter: { path: 'priority'}, factory: '.employeesFactory'}" class="sapUiMediumMarginTop">
+                <columns>
+                    <Column >
+                        <Text text="First Name"></Text>
+                    </Column>
+                    <Column >
+                        <Text text="Last Name"></Text>
+                    </Column>
+                    <Column >
+                        <Text text="Email"></Text>
+                    </Column>
+                    <Column >
+                        <Text text="Priority"></Text>
+                    </Column>
+                    <Column >
+                        <Text text="Active"></Text>
+                    </Column>
+                </columns>
+            </Table>
+        </content>
+    </Page>
+</mvc:View>
