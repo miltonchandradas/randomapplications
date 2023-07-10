@@ -7,9 +7,26 @@ sap.ui.define(
     "use strict";
 
     return Controller.extend("com.sap.uiapp2.controller.Master", {
-      onInit: function () {},
+      onInit: function () {
+        console.log("onInit method is called...");
+      },
+
+      onBeforeRendering: function () {
+        console.log("onBeforeRendering method is called...");
+      },
+
+      onAfterRendering: function () {
+        console.log("onAfterRendering method is called...");
+      },
+
+      onExit: function () {
+        console.log("onExit method is called...");
+      },
 
       employeesFactory: function (id, context) {
+        console.log("employeesFactory method is called...");
+        console.log("id: ", id);
+
         let active = context.getProperty("active");
         let cell;
         if (active) {
