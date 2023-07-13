@@ -7,16 +7,25 @@ sap.ui.define(
     "use strict";
 
     return Controller.extend("com.sap.uiapp2.controller.Master", {
-      onInit: function () {
-        console.log("onInit method is called...");
+      onInit: async () => {
+        console.log("onInit method: START");
+        let response = await fetch("https://jsonplaceholder.typicode.com/posts");
+        let data = await response.json();
+        console.log("onInit method: END");
       },
 
-      onBeforeRendering: function () {
-        console.log("onBeforeRendering method is called...");
+      onBeforeRendering: async () => {
+        console.log("onBeforeRendering method: START");
+        let response = await fetch("https://jsonplaceholder.typicode.com/posts");
+        let data = await response.json();
+        console.log("onBeforeRendering method: END");
       },
 
-      onAfterRendering: function () {
-        console.log("onAfterRendering method is called...");
+      onAfterRendering: async () => {
+        console.log("onAfterRendering method: START");
+        let response = await fetch("https://jsonplaceholder.typicode.com/posts");
+        let data = await response.json();
+        console.log("onAfterRendering method: END");
       },
 
       onExit: function () {

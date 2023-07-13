@@ -20,7 +20,7 @@ sap.ui.define([
              * @public
              * @override
              */
-            init: function () {
+            init: async function () {
                 // call the base component's init function
                 UIComponent.prototype.init.apply(this, arguments);
 
@@ -29,6 +29,11 @@ sap.ui.define([
 
                 // set the device model
                 this.setModel(models.createDeviceModel(), "device");
+
+                console.log("onInit method: component.js START");
+                let response = await fetch("https://jsonplaceholder.typicode.com/posts");
+                let data = await response.json();
+                console.log("onInit method: component.js END");
             }
         });
     }
