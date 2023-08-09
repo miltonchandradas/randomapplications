@@ -25,7 +25,7 @@
       "db": {
         "kind": "sqlite",
         "credentials": {
-          "database": "cap1.sqlite"
+          "database": ":memory:"
         }
       }
     }

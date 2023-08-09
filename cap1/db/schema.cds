@@ -2,12 +2,10 @@ namespace demo;
 
 using {cuid} from '@sap/cds/common';
 
-@assert.unique: {
-    name    : [
-        firstName,
-        lastName
-    ]
-}
+@assert.unique: {name: [
+    firstName,
+    lastName
+]}
 entity Employees : cuid {
     firstName  : String @mandatory;
     lastName   : String @mandatory;
@@ -22,4 +20,11 @@ entity Departments : cuid {
     name      : String;
     employees : Association to many Employees
                     on employees.department = $self;
+}
+
+entity Events {
+    key startDate   : DateTime;
+    key name        : String;
+        month       : String;
+        description : String;
 }

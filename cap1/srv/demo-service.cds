@@ -7,5 +7,7 @@ service DemoService {
 
     entity Employees as select from demo.Employees;
 
+    entity Events as select from demo.Events;
+
     function EmployeeOperations(payload: String, operation: String) returns Employees;
 }
