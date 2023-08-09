@@ -142,9 +142,6 @@ sap.ui.define(
 
       onNavigate: function (oEvent) {
         let src = oEvent.getSource();
-        let item = src.getParent();
-
-        let bindingContext = item.getBindingContext();
         let sPath = src.getBindingContext().sPath;
 
         let sPathEncoded = encodeURIComponent(sPath);
