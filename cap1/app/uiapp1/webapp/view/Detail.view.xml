@@ -1,0 +1,29 @@
+<mvc:View controllerName="com.sap.uiapp1.controller.Detail"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}" busy="{viewModel>/busy}" class="sapUiSizeCompact">
+        <content>
+            <VBox class="sapUiSmallMargin">
+                <HBox>
+                    <Label class="sapUiSmallMargin" text="Start Date:"></Label>
+                    <DatePicker editable="false" value="{path: 'startDate', type: 'sap.ui.model.type.Date', formatOptions: {style: 'medium', UTC: true}}"></DatePicker>
+                </HBox>
+
+                <HBox >
+                    <Label class="sapUiSmallMarginEnd" text="Event Name:"></Label>
+                    <Text text="{name}"></Text>
+                </HBox>
+
+                <HBox>
+                    <Label class="sapUiSmallMarginEnd" text="Event Description:"></Label>
+                    <Text text="{description}"></Text>
+                </HBox>
+
+                <HBox>
+                    <Label class="sapUiSmallMarginEnd" text="Month:"></Label>
+                    <Text text="{month}"></Text>
+                </HBox>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

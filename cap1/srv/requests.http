@@ -1,0 +1,5 @@
+### GET Employees
+GET http://localhost:4004/v2/service/demo/Employees
+
+### GET Events
+GET http://localhost:4004/v2/service/demo/Events
